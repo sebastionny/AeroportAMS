@@ -26,7 +26,65 @@ public class VolController  {
 		// trai....
 		model.addAttribute("listeVols", services.getAllVols());
 		return "index";
-		//   /Pages/produit.jsp
+		
+	}
+	//searchVol.aspx
+/*	@RequestMapping(value="/searchVol")
+	public String searchVol1(Model model, @RequestParam String id){
+		
+		model.addAttribute("listeVols", services.getVolByNumVol(id));
+		
+		return "index";
+	}*/
+	
+	@RequestMapping(value="/searchVol")
+	public String searchVol(Model model, @RequestParam String id, @RequestParam String val){
+		
+		if(val.contentEquals("num")) {
+		model.addAttribute("listeVols", services.getVolByNumVol(id));
+		}
+		if(val.contentEquals("comp")) {
+		model.addAttribute("listeVols", services.getVolByComp(id));
+		}
+		return "index";
+		
+	}
+	
+	@RequestMapping(value="/filtreD")
+	public String searchVolD(Model model){
+		
+		
+		model.addAttribute("listeVols", services.getVolByDepartVol());
+		
+		return "index";
+		
+	}
+	@RequestMapping(value="/filtreA")
+	public String searchVolA(Model model){
+		
+		
+		model.addAttribute("listeVols", services.getVolByArriveVol());
+		
+		return "index";
+		
+	}
+	@RequestMapping(value="/filtreAuj")
+	public String searchVolAuj(Model model){
+		
+		
+		model.addAttribute("listeVols", services.getVolByAujVol());
+		
+		return "index";
+		
+	}
+	@RequestMapping(value="/filtreDemain")
+	public String searchVolDemain(Model model){
+		
+		
+		model.addAttribute("listeVols", services.getVolByDemainVol());
+		
+		return "index";
+		
 	}
 	
 	@RequestMapping(value="/connection")
@@ -44,6 +102,8 @@ public class VolController  {
 					return "connection";
 				}
 					
+	
+		
 	//	model.addAttribute("a", "salut");
 		
 		//   /Pages/produit.jsp
@@ -53,7 +113,7 @@ public class VolController  {
 		// trai....
 		
 	
-		return "admin La application";
+		return "admin";
 		//   /Pages/produit.jsp
 	}
 	
