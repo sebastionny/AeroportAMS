@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat+Alternates:600,900');
+@import url('https://fonts.googleapis.com/css?family=Rajdhani:300,500,700&display=swap');
+
+
+body{
+  background: url('../img/background.jpg') no-repeat;
+  background-size: cover ;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Rajdhani', sans-serif;
+}
+.logo{max-width: 260px!important;}
+
+.date{
+  text-align: center;
+}
+
+.date h2{
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-size: 3.5em;
+    font-weight: 900;
+    color: #042F4B;
+  }
+
+.date h4{
+    font-family: 'Rajdhani', sans-serif;
+    color: #ED1250;
+    font-size: 1em;
+    letter-spacing: 1px;
+  }
+
+
+.btn-solid{
+  border-radius: 20px!important;
+  font-size: 0.8em!important;
+  padding: 2px 18px!important;
+  background: #ED1250!important;
+  color: #fff!important;
+  font-family: 'Rajdhani', sans-serif!important;
+  border: 1px solid #ED1250!important;
+}
+
+.btn-line{
+  border-radius: 20px!important;
+  font-size: 0.8em!important;
+  padding: 2px 15px!important;
+  background: #fff!important;
+  color: #042F4B!important;
+  font-family: 'Rajdhani', sans-serif!important;
+  border: 1px solid #ED1250!important;
+}
+
+.containerListe {
+  background: #042F4B;
+  padding: 1em;
+  border-radius: 10px 15px 80px 12px;
+  padding-bottom: 3em;
+}
+
+.head{
+  font-family: 'Rajdhani', sans-serif;
+  color: #fff;
+}
+
+.head p{
+    text-align: center;
+    font-size: 0.8em;
+    letter-spacing: 2px;
+    margin-top: 20px;
+}
+
+.head p span{
+    color: #ED1250;
+}
+
+.head h1{ font-weight: 300!important;
+    font-size: 3.5em;
+  }
+
+.head .row{ max-height: 80px; }
+img{max-width: 60px!important;}
+
+
+/* Table ------------------------------------------------------------------------ */
+
