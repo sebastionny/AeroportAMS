@@ -1,71 +1,123 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="sw" uri="http://java.sun.com/jsp/jstl/core" %>    
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Aeroport AMS</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script type="text/javascript" src="./js/angular.js"></script>
+	<link rel="stylesheet" href="./css/style.css">
+    <title>Aeroport AMS</title>
+</head>
+
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-<script type="text/javascript" src="js/angular.js"></script>
-</head>
+
 <body ng-app="myApp">
-<h1>Hello 1er essai</h1>
-<h1>Hello 2 eme essai Mery</h1>
-	<h1>Aeroport AMS</h1>
-	<p>Bienvenue a l'Aeroport AMS</p>
-	<p>la liste des vols de l'Aeroport AMS</p>
-	<a href="filtreD.aspx"> Depart</a>
-	<a href="filtreA.aspx"> Arriv�</a>
-		<a href="filtreAuj.aspx"> Vol Aujourd'hui</a>
-	<a href="filtreDemain.aspx"> Vol de Demain</a>
-	Recherche par:
-	
-	<form action="searchVol.aspx" method="post">
-	<select name="val">
-  <option value="num">Num�ro</option>
-  <option value="date">Date</option>
-  <option value="ville">Ville</option>
-  <option value="comp">Compagnie</option>
-	</select>
-	Num Vol: <input type="text" name="id"/>
-	<input type="submit" value="Afficher"/>
-	</form>
-	<hr/>
-		<table border="1" width="100%">
-		<tr>
-		<th>Type</th>
-			<th># Vol</th>
-			<th>Compagnie</th>
-			<th>Depart</th>
-			<th>Destination</h>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-9 containerListe">
 			
-			<th>Heure Planifi�</th>
-			<th>Heure Estim�e</th>
+				<div class="head">
+					<div class="row">
+					    <div class="col-sm-3">
+					            <h1>Vols</h1>
+					    </div>
+					    <div class="col-sm-6">
+					        <p>DERNIÉR MISE À JOUR <span>IL Y A 10 MIN</span></p>
+					    </div>
+					    <div class="col-sm-3">
+					            <a href="filtreD.aspx" class="col-sm-6">
+					                <img src="./img/departBtn.png"  class="img-fluid" alt="Départ"/>
+					            </a>
+					            <a href="filtreA.aspx" class="">
+					                <img src="./img/arriveBtn.png"  class="img-fluid" alt="Arrivée"/>
+					            </a>
+					    </div>
+					</div>
+				</div>
 			
-			<th>Statut</th>
-			<th>Suivre</h>
-		</tr>
+					<h2>Recherche par:</h2>
+					
+					<form action="searchVol.aspx" method="post">
+					<select name="val">
+				  <option value="num">Numéro</option>
+				  <option value="date">Date</option>
+				  <option value="ville">Ville</option>
+				  <option value="comp">Compagnie</option>
+					</select>
+					Num Vol: <input type="text" name="id"/>
+					<input type="submit" value="Afficher"/>
+					</form>
+					<hr/>
+					
+					<table border="1" width="100%">
+						<tr class="headTable">
+						<th>Type</th>
+							<th># Vol</th>
+							<th>Compagnie</th>
+							<th>Depart</th>
+							<th>Destination</h>
+							
+							<th>Heure Planifié</th>
+							<th>Heure Estimée</th>
+							
+							<th>Statut</th>
+							<th>Suivre</h>
+						</tr>
+						
+						<!--  listeVols  --> 
+						<sw:forEach items="${listeVols}" var="o" >
+							<tr>
+								<td> <a href="#" class="btn btn-filtre-${o.volDepart } "></a>    </td>
+								<td>${o.numVol }</td>
+								<td>${o.idCompagnie }</td>
+								<td>${o.codeAerDepart }</td>
+								<td>${o.aeroportDestination }</td>
+							
+								<td>${o.heurePanifie }</td>
+								<td>${o.heureEstime }</td>
+								<td>${o.statutChange }</td>
+								
+								<td class="btn-suivre"><a  href="#"><img class="img-fluid" src="./img/btn.png" alt="Suivre un vol"></a></td>
+							
+							</tr>
+						</sw:forEach> 
+					</table>
+
+
+			</div>	
+			<div class="col-sm-3">
+
+					<a href="#" class="logo" >
+						<img src="./img/logo.gif " class="img-fluid mt-3" alt="Aeroport AMS "/>
+					</a>
 		
-		<!--  listeVols  -->
-		<sw:forEach items="${listeVols}" var="o" >
-			<tr>{{gggg| filter}}
-				<td>${o.volDepart }</td>
-				<td>${o.numVol }</td>
-				<td>${o.idCompagnie }</td>
-				<td>${o.codeAerDepart }</td>
-				<td>${o.aeroportDestination }</td>
-			
-				<td>${o.heurePanifie }</td>
-				<td>${o.heureEstime }</td>
-				<td>${o.statutChange }</td>
-				
-				<td><a  href="#"> Suivre</a></td>
-			
-			</tr>
-		</sw:forEach>
-	</table>
+					<div class="date mt-5">
+						<h2>21:20</h2>
+						<h4>21 / NOV / 2019</h4>
+					</div>
+					
+					<div class=" mt-3">
+						
+						<a href="filtreAuj.aspx" class="btn btn-solid col-6">AUJOURD’HUI</a>
+						<a href="filtreDemain.aspx" class="btn btn-line col-6">DEMAIN</a>
+					</div>
+			</div>	
+		</div>
+	</div>
+
+
+
+
+
+
+	
 	<a href="connection.aspx"> Connection</a>
 	
 </body>

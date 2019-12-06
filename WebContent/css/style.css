@@ -10,7 +10,7 @@ body{
 
 body {
   margin: 0;
-  font-family: 'Rajdhani', sans-serif;
+  font-family: 'Rajdhani', sans-serif!important;
 }
 .logo{max-width: 260px!important;}
 
@@ -81,8 +81,56 @@ body {
   }
 
 .head .row{ max-height: 80px; }
-img{max-width: 60px!important;}
+.head .row img{max-width: 60px!important;}
+
+
+
 
 
 /* Table ------------------------------------------------------------------------ */
+
+th {
+    border: 0px;
+}
+
+td {
+    border: none;
+}
+
+tr {
+    border-bottom: 1px solid #032033;
+    border-left: 1px solid #042f4b;
+    border-right: 1px solid #042f4b;
+    color: #fff;
+}
+
+tr td {
+    border: none;
+    height: 38px;
+    font-size: 15px;
+    vertical-align: middle;
+}
+
+.headTable {
+    background: #042840;
+    border: none;
+    border-bottom: 1px solid #ed1250;
+    color: #fff;
+}
+
+.btn-suivre img {
+    max-height: 30px;
+    margin: 5px;
+}
+
+.btn-filtre-1 {
+    padding: 7px;
+    background: #ED1251;
+}
+
+.btn-filtre-0 {
+    padding: 7px;
+    background: #b7e886;
+}
+
 
