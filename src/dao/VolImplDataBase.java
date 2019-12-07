@@ -6,7 +6,7 @@ import org.hibernate.Session;
 
 import util.HibernateUtil;
 
-public class VolImplDataBase implements VolDAO {
+public class VolImplDataBase implements VolDAO{
 
 	
 	public List<Vol> getAllVols() {
@@ -68,4 +68,45 @@ public class VolImplDataBase implements VolDAO {
 		session.beginTransaction();
 		return session.createQuery("from Vol where dateVol=current_date+1").list();
 	}
+
+
+
+	public void addVol(Vol1 v) {
+		Session session =  HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		session.save(v);
+		session.getTransaction().commit();
+		
+	}
+
+		public User getInfoAdmin(String user, String password) {
+		
+		Session session =  HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		User adm = new User ();
+		adm=(User)session.createQuery("from User where usager='"+user+"' and motdepasse='"+password+"'").uniqueResult();
+		if(adm !=null) {
+		return adm;
+		}
+		else
+		
+		/*User u=(User)session.load(User.class,user);
+		return u;*/
+		//Query query = session.createQuery(sql);
+		//query.setString("username", username);
+		//query.setString("password", password);
+		//List<User> users = session.createQuery("from User where usager='"+user+"' and motdepasse='"+password+"'" ).list();
+		//if(users.size() == 0) {
+		//	return null;
+		//}
+		//return users.get(0);
+		return null;
+	
+	}
+
+
+
+
+
+
 }

@@ -32,6 +32,11 @@
         <property name="hbm2ddl.auto">update</property>
          
         <mapping resource="dao/Vol.hbm.xml"/>
+        <mapping resource="dao/Vol1.hbm.xml"/>
+        <mapping resource="dao/User.hbm.xml"/>
+        <mapping resource="dao/client/Client.hbm.xml"/>
+        <mapping resource="dao/notification/Notification.hbm.xml"/>
+
   		
     </session-factory>
 </hibernate-configuration>

@@ -2,8 +2,11 @@ package services;
 
 import java.util.List;
 
+import dao.User;
 import dao.Vol;
+import dao.Vol1;
 import dao.VolDAO;
+
 
 public class VolImplMetier implements VolMetier {
 	
@@ -19,7 +22,6 @@ public class VolImplMetier implements VolMetier {
 	public void setDao(VolDAO dao) {
 		this.dao = dao;
 	}
-
 
 
 	public List<Vol> getVolByNumVol(String id) {
@@ -63,7 +65,18 @@ public class VolImplMetier implements VolMetier {
 
 
 
-	
-	
+	public void addVol(Vol1 v) {
+	dao.addVol(v);
+		
+	}
+
+	public User getInfoAdmin(String user, String password) {
+		// TODO Auto-generated method stub
+		//return dao.getInfoAdmin(user);
+		return dao.getInfoAdmin(user, password);
+	}
+
+
+
 	
 }

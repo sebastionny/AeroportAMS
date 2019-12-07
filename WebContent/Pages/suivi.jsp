@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<script type="text/javascript" src="./js/angular.js"></script>
 	<link rel="stylesheet" href="./css/style.css">
-    <title>Aeroport AMS</title>
+    <title>Aeroport AMS | Suivi</title>
 </head>
 
 
@@ -26,7 +26,7 @@
 				<div class="head">
 					<div class="row">
 					    <div class="col-sm-3">
-					            <h1>Vols</h1>
+					            <h1>Suivi ton vol</h1>
 					    </div>
 					    <div class="col-sm-6">
 					        <p>DERNIÉR MISE À JOUR <span>IL Y A 10 MIN</span></p>
@@ -65,7 +65,7 @@
 					  
 					</div>
 					<div class="col-sm-4">
-						<button type="submit" class="btn btn-primary mb-2">RECHERCHER</button>
+						<button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
 						</form>
 					</div>
 					  

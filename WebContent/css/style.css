@@ -79,6 +79,12 @@ body {
 .head h1{ font-weight: 300!important;
     font-size: 3.5em;
   }
+.containerListe h2{
+  font-weight: 300!important;
+  font-size: 2em;
+  color: #fff;
+  }
+
 
 .head .row{ max-height: 80px; }
 .head .row img{max-width: 60px!important;}
@@ -133,4 +139,9 @@ tr td {
     background: #b7e886;
 }
 
+.btn-primary {
+    color: #fff;
+    background-color: #ed1250!important;
+    border-color: #ed1250!important;
+}
 

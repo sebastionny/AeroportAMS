@@ -12,6 +12,10 @@ public interface VolDAO {
 	public List<Vol> getVolByArriveVol();
 	public List<Vol> getVolByAujVol();
 	public List<Vol> getVolByDemainVol();
+	public void addVol(Vol1 v);
+	//public User getInfoAdmin(String user);
+	public User getInfoAdmin(String user, String password);
+	
 
 	
 }
