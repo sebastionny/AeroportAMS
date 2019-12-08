@@ -6,6 +6,7 @@ public interface ClientDAO {
 	
 
 	public List<Client> getAllClients();
+	public void addClient(Client c);
 	
 
 	

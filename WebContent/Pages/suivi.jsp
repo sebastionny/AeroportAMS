@@ -25,107 +25,117 @@
 			
 				<div class="head">
 					<div class="row">
-					    <div class="col-sm-3">
-					            <h1>Suivi ton vol</h1>
-					    </div>
 					    <div class="col-sm-6">
-					        <p>DERNIÉR MISE À JOUR <span>IL Y A 10 MIN</span></p>
+					            <h1>Suivi Vol</h1>
 					    </div>
-					    <div class="col-sm-3">
-					            <a href="filtreD.aspx" class="col-sm-6">
-					                <img src="./img/departBtn.png"  class="img-fluid" alt="Départ"/>
-					            </a>
-					            <a href="filtreA.aspx" class="">
-					                <img src="./img/arriveBtn.png"  class="img-fluid" alt="Arrivée"/>
-					            </a>
-					    </div>
+					    <div class="col-sm-6"></div>
+					    
 					</div>
 				</div>
 			
 				<div class="row">
-				<div class="col-sm-12"><h2>Recherche par:</h2> </div>
+					<div class="col-sm-12"><h2 >Suivre ce vol par SMS</h2> </div>
+
+					<div class="col-sm-12">
+						<div class="col-sm-6 float-left colorFontWhite">
+							<H3>${vol[0].numVol}</H3>
+							<p>${vol[0].idCompagnie}</p>
+						</div>
+						<div class="col-sm-6 float-right text-right">
+							<div class="btn btn-solid">${vol[0].statutChange}</div>
+						</div>
+					</div>
+
+					<div class=" col-sm-12 details ">
+						<div class="col-sm-6 float-left">
+							<h4>${vol[0].aeroportDestination}</h4>
+							<p>Heure Planifié ${vol[0].heurePanifie}</p>
+						</div>
+						<div class="col-sm-6 float-right text-right">
+							<h4>${vol[0].idVille}</h4>
+							<p>Heure Estimé ${vol[0].heureEstime} </p>
+						</div>
+
+						<div class="col-sm-12">
+							<hr class="line">
+						</div>
+					</div>
+					
+					<c:choose>
+					   <c:when test="${mgs}">
+
+						<div class="text-center notification">
+								<h2 >${mgs}</h2>
+						</div>
+					
+					</c:when> 
+					   <c:otherwise>
+					   
+					   <div class="container row">
+							<div class="col-sm-6">
+									<form action="savesuivi.aspx" method="post" class="row">
+										<div class="form-group col-sm-6">
+											<label for="inputState" class="colorFontWhite"># VOL</label>
+											<input type="text" class="form-control" id="inputCity" name="idVol" value="${vol[0].numVol}">
+										</div>
+		
+										<div class="form-group col-sm-6">
+											<label for="inputState" class="colorFontWhite">LANGUE</label>
+											<select id="inputState" class="form-control">
+												<option selected value="EN">EN</option>
+												<option value="FR">FR</option>
+											</select>
+										</div>
+		
+										<div class="form-group col-sm-6">
+											<label for="inputCity" class="colorFontWhite">Numéro Cel:</label>
+											<input type="text" class="form-control" id="inputCity" name="telClient">
+										</div>
+										<div class="form-group col-sm-6 align-self-end">
+											<button type="submit" class="btn btn-primary">SUIVRE CE VOL</button>
+										</div>		
+											
+								</form>
+
+							</div>
+
+							<div class="col-sm-6 avis">
+									<h5>AVIS IMPORTANT</h5>
+									<p>Recevez instantanément par messagerie texte (SMS) le statut actuel de votre vol ou une alerte pour tout changement d'horaire de plus de 10 minutes. Vous pouvez vous inscrire à ce service pratique à l’aide du formulaire ci-dessous. Pour vous inscrire à partir de votre cellulaire, textez simplement votre numéro de vol au 23636. Exemple : Si vous voulez de l'information sur le vol AY123 en provenance de Calgary, envoyez «AY123» au numéro 23636. 
+	
+										<br>	Taux standard de messagerie texte applicables.</p>
+							</div>
+						</div>
+					   
+					   </c:otherwise>    
+					</c:choose>
+
+
+
+				</div>
 				
 					
-					<div class="col-sm-4">
-						<form action="searchVol.aspx" method="post">
-					<div class="form-group mb-2">
-					    <select name="val" class="form-control">
-						  <option value="num">Numéro</option>
-						  <option value="date">Date</option>
-						  <option value="ville">Ville</option>
-						  <option value="comp">Compagnie</option>
-						</select>
-					  </div>
-					</div>
-					<div class="col-sm-4">
-					
-					<div class="form-group mx-sm-3 mb-2">
-					    <input type="text" class="form-control" id="recherche" placeholder="recherche" name="id">
-					  </div>
-					  
-					</div>
-					<div class="col-sm-4">
-						<button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
-						</form>
-					</div>
-					  
-					
-					
-		
-					</div>
-					<hr/>
-					
-					<table border="1" width="100%">
-						<tr class="headTable">
-						<th>Type</th>
-							<th># Vol</th>
-							<th>Compagnie</th>
-							<th>Depart</th>
-							<th>Destination</h>
-							
-							<th>Heure Planifié</th>
-							<th>Heure Estimée</th>
-							
-							<th>Statut</th>
-							<th>Suivre</h>
-						</tr>
-						
-						<!--  listeVols  --> 
-						<sw:forEach items="${listeVols}" var="o" >
-							<tr>
-								<td> <a href="#" class="btn btn-filtre-${o.volDepart } "></a>    </td>
-								<td>${o.numVol }</td>
-								<td>${o.idCompagnie }</td>
-								<td>${o.codeAerDepart }</td>
-								<td>${o.aeroportDestination }</td>
-							
-								<td>${o.heurePanifie }</td>
-								<td>${o.heureEstime }</td>
-								<td>${o.statutChange }</td>
-								
-								<td class="btn-suivre"><a  href="#"><img class="img-fluid" src="./img/btn.png" alt="Suivre un vol"></a></td>
-							
-							</tr>
-						</sw:forEach> 
-					</table>
+				
+
 
 
 			</div>	
 			<div class="col-sm-3">
 
-					<a href="#" class="logo" >
+					<a href="index.aspx" class="logo" >
 						<img src="./img/logo.gif " class="img-fluid mt-3" alt="Aeroport AMS "/>
 					</a>
 		
 					<div class="date mt-5">
-						<h2>21:20</h2>
-						<h4>21 / NOV / 2019</h4>
+						<h2><span id="time"></span></h2>
+						<h4><span id="day"></span>/<span id="year"></span></h4>
+						
 					</div>
 					
-					<div class=" mt-3">
+					<div class=" mt-3" style="text-align: center;">
 						
-						<a href="filtreAuj.aspx" class="btn btn-solid">AUJOURD’HUI</a>
-						<a href="filtreDemain.aspx" class="btn btn-line col-6">DEMAIN</a>
+						<a href="connection.aspx" class="btn btn-solid">INTRANET</a>
+
 					</div>
 			</div>	
 		</div>
@@ -140,6 +150,38 @@
 	<a href="connection.aspx"> Connection</a>
 	
 </body>
+
+
+<script>
+  function checkTime(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
+
+function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+	var year=today.getFullYear();
+	var day=today.getDate();
+	var month=today.getMonth();
+	month++;
+    // add a zero in front of numbers<10
+    m = checkTime(m);
+    s = checkTime(s);
+   document.getElementById('time').innerHTML = h + ":" + m ;
+   document.getElementById("year").innerHTML = year;
+   document.getElementById("day").innerHTML=day+ "/" +month;
+     // document.getElementById('time').innerHTML = h + ":" + m ;
+    t = setTimeout(function () {
+        startTime()
+    }, 500);
+}
+startTime();
+</script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

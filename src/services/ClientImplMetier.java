@@ -35,5 +35,18 @@ public class ClientImplMetier implements ClientMetier {
 		return dao.getAllClients();
 	}
 
+
+
+
+
+	public void addClient(Client c) {
+		// TODO Auto-generated method stub
+		dao.addClient(c);
+		
+	}
+
+
+
+
 	
 }

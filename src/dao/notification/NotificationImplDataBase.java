@@ -15,6 +15,13 @@ public class NotificationImplDataBase implements NotificationDAO{
 		return null;
 	}
 
+	public void addNotification(Notification n) {
+		Session session =  HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		session.save(n);
+		session.getTransaction().commit();
+	}
+		
 
 
 }

@@ -103,7 +103,7 @@
 								<td>${o.heureEstime }</td>
 								<td>${o.statutChange }</td>
 								
-								<td class="btn-suivre"><a  href="#"><img class="img-fluid" src="./img/btn.png" alt="Suivre un vol"></a></td>
+								<td class="btn-suivre"><a  href="suiviVol.aspx?id=${o.numVol}"><img class="img-fluid" src="./img/btn.png" alt="Suivre un vol"></a></td>
 							
 							</tr>
 						</sw:forEach> 

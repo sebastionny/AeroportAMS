@@ -7,6 +7,8 @@ public interface NotificationDAO {
 
 	public List<Notification> getAllNotifications();
 
+	public void addNotification(Notification n);
+
 	
 }
 

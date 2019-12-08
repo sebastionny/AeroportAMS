@@ -2,6 +2,10 @@
 @import url('https://fonts.googleapis.com/css?family=Rajdhani:300,500,700&display=swap');
 
 
+.colorFontWhite{
+  color: #fff;
+}
+
 body{
   background: url('../img/background.jpg') no-repeat;
   background-size: cover ;
@@ -17,6 +21,7 @@ body {
 .date{
   text-align: center;
 }
+
 
 .date h2{
     font-family: 'Montserrat Alternates', sans-serif;
@@ -89,6 +94,10 @@ body {
 .head .row{ max-height: 80px; }
 .head .row img{max-width: 60px!important;}
 
+.notification{
+	background: #ED1251;
+}
+
 
 
 
@@ -143,5 +152,24 @@ tr td {
     color: #fff;
     background-color: #ed1250!important;
     border-color: #ed1250!important;
+}
+
+.details{
+  color:#fff;
+}
+
+.details h4{
+  color:#ED1251;
+}
+
+.avis {
+  color: #fff;
+  font-size: 12.2px;
+  text-align: justify;
+}
+
+.line {
+  background: #ed1250;
+  margin-top: 32px;
 }
 

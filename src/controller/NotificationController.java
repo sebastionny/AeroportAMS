@@ -9,6 +9,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
+
 
 import org.aspectj.weaver.ast.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,14 +42,38 @@ public class NotificationController  {
 	@Autowired
 	ClientMetier servicesClient;
 	
-	
-	@RequestMapping(value="/suivi")
-	public String pageSuivi(Model model){
 
-		model.addAttribute("listeVols", servicesVol.getAllVols());
-		model.addAttribute("listeNotification", servicesNotification.getAllNotifications());
-		model.addAttribute("listeClient", servicesClient.getAllClients());
-				
+	
+	// Il recupere l'information du vol a suivre
+	
+	@RequestMapping(value="/suiviVol")
+	public String searchVol(Model model, @RequestParam String id){
+
+		model.addAttribute("vol", servicesVol.getVolByNumVol(id));
+		return "suivi";
+		
+	}
+	
+	
+	// Il enregistre le client y demarre le notificación.
+	@RequestMapping(value="/savesuivi")
+	public String singNotification(Model model, @RequestParam String idVol, @RequestParam String telClient){
+		
+		model.addAttribute("vol", servicesVol.getVolByNumVol(idVol));
+		
+		try{	
+			servicesClient.addClient(new Client(telClient));
+			servicesNotification.addNotification(new Notification( new Random().nextInt(999999999) , telClient , idVol , true ));
+			
+			model.addAttribute("mgs", "Notification enregistrée !!!!");
+		}
+		
+		catch (Exception e){
+
+			model.addAttribute("mgs", "Notification pas enregistrée!!!!");
+		}
+
+		//model.addAttribute("vol", servicesVol.getVolByNumVol(id));
 		return "suivi";
 		
 	}
