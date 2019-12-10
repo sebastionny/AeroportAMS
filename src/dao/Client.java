@@ -1,4 +1,6 @@
-package dao.client;
+package dao;
+
+
 
 public class Client {
 	

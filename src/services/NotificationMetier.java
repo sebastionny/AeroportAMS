@@ -2,14 +2,14 @@ package services;
 
 import java.util.List;
 
-import dao.notification.Notification;
+import dao.Notification;
 
 
 
 public interface NotificationMetier {
 
 	public List<Notification> getAllNotifications();
-	public void addNotification(Notification n);
+	public boolean addNotification(Notification n);
 
 	
 }

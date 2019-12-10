@@ -11,8 +11,8 @@
               http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
 <bean class="dao.VolImplDataBase" id="volamsDAO" init-method="init" ></bean>
-<bean class="dao.client.ClientImplDataBase" id="clientsamsDAO"></bean>
-<bean class="dao.notification.NotificationImplDataBase" id="notificationsamsDAO" ></bean>
+<bean class="dao.ClientImplDataBase" id="clientsamsDAO"></bean>
+<bean class="dao.NotificationImplDataBase" id="notificationsamsDAO" ></bean>
 
 <bean class="services.VolImplMetier" id="volamsServices">
 	<property name="dao" ref="volamsDAO"  ></property>

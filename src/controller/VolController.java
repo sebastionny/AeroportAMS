@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -21,8 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import dao.User;
 import dao.Vol;
 import dao.Vol1;
-//import services.ClientMetier;
-//import services.NotificationMetier;
+import dao.volajour;
 import services.VolMetier;
 
 
@@ -41,50 +41,29 @@ public class VolController  {
 		return "index";
 		
 	}
-	//searchVol.aspx
-/*	@RequestMapping(value="/searchVol")
-	public String searchVol1(Model model, @RequestParam String id){
-		
-		model.addAttribute("listeVols", services.getVolByNumVol(id));
-		
-		return "index";
-	}*/
-	
+
 	@RequestMapping(value="/searchVol")
 	public String searchVol(Model model, @RequestParam String id, @RequestParam String val){
-		
+		if(val.contentEquals("aer")) {
+			model.addAttribute("listeVols", services.getVolByAer(id));
+			}
 		if(val.contentEquals("num")) {
 		model.addAttribute("listeVols", services.getVolByNumVol(id));
 		}
 		if(val.contentEquals("comp")) {
 		model.addAttribute("listeVols", services.getVolByComp(id));
 		}
+		
 		return "index";
 		
 	}
-	
-	
-	@RequestMapping(value="/espaceAdmin")
-	public String espaceAdmin(Model model, @RequestParam String user, @RequestParam String password){
-		String error="";
-		model.addAttribute("listeAdm", services.getInfoAdmin(user,password));
-		User admin= new User ();
-		admin=services.getInfoAdmin(user, password);
-		if(admin !=null) {
-		if(admin.getUsager().contentEquals(user) && admin.getMotdepasse().contentEquals(password)) {
-			return "espaceAdm";}
-			else
-				error="Vous n'etes pas connect�s!";
-				
-				return "connection";
+	@RequestMapping(value="/espaceAdm")
+	public String pageConnection(Model model){
 		
-		}
-		else 
-			model.addAttribute("error",error);
-			return "connection";
-
-	}
 	
+		return "espaceAdm";
+		
+	}
 	@RequestMapping(value="/filtreD")
 	public String searchVolD(Model model){
 		
@@ -125,36 +104,17 @@ public class VolController  {
 	@RequestMapping(value="/connection")
 	public String pageConnection(Model model,String nom,String motpasse){
 		// trai....
-		String con="";
-		if(nom=="assia" && motpasse=="123")
-				{
-			con="vous ete connecter";
-			model.addAttribute("con",con);
-			return "admin";
-				}else {
-					con="vous n' ete pas connecter";
-					model.addAttribute("con",con);
+		
 					return "connection";
-				}
-					
+			
 	
 		
-	//	model.addAttribute("a", "salut");
-		
-		//   /Pages/produit.jsp
+
 	}
-	@RequestMapping(value="/admin")
-	public String pageConnection(){
-		// trai....
-		
 	
-		return "admin";
-		//   /Pages/produit.jsp
-	}
 	@RequestMapping(value="/chargerFichier")
 	public String chargerFichier(Model model) throws ParseException{
-	String fichier ="C:\\Users\\assia\\Desktop\\fichier.txt";//C:\Users\admin\Desktop
-	
+	String fichier ="/Users/tallernait/Documents/workspace/AeroportAMS/calendrier.txt";
 		ArrayList<String> liste=new ArrayList<String>();
 		ArrayList<Vol1> tests=new ArrayList<Vol1>();
 
@@ -177,48 +137,74 @@ public class VolController  {
 	
 		}    
 		catch (Exception e){
-			model.addAttribute("erreur", "Le fichier n'existe pas !!!!");
-		  return "admin";
+			model.addAttribute("erreur", "Le fichier n'existe pas!");
+		  return "espaceAdm";
 		}
-	
+		try{
 		
 		for (String l : liste) {
 		String[]  mots = l.split(",");
 			Vol1 v=new Vol1();
+			volajour va=new volajour(); 
 			v.setNumVol(mots[0]);
+			va.setNumVol(mots[0]);
 			v.setCodeAerDepart(mots[1]);
-			v.setAeroportDestination(mots[2]);
-			v.setCodeCalendrier(mots[3]);
-		//	Date date = mots[4].;
-			//v.setDateVol(date);
-		/*	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MMM-dd");
-	       Date date = formatter.parse(mots[4]);
-	       v.setDateVol(date);*/
-		v.setHeurePanifie(mots[4]);
+			Date date=new SimpleDateFormat("yyyy-MM-dd").parse(mots[2]);
+			v.setDateVol(date);
+			va.setDateVol(date);
+			v.setAeroportDestination(mots[3]);
+			v.setHeurePanifie(mots[4]);
+			va.setHeureEstime(mots[4]);
 			v.setIdCompagnie(mots[5]);
-			v.setVolDepart(mots[6]);
-		try{	
-			services.addVol(v);
-			model.addAttribute("erreur", "Le calandrier a Charg� avec succee !!!!");
-			 return "admin";
-			}	catch (Exception e){
-				model.addAttribute("erreur", "Le calandrier a Charg� avec succee !!!!");
-			  return "admin";
+			v.setCodeCalendrier(mots[6]);
+			v.setVolDepart(mots[7]);
+			if(Integer.parseInt(mots[7])==1) {
+				va.setStatutChange("Depart");
+			}else  {
+				va.setStatutChange("Arrivé");
 			}
+
+		
+			
+			services.addVol(v);
+		services.addVolaJour(va);
+			
+		}
+		model.addAttribute("erreur", "Le calendrier a été chargé avec succée!");
+		}    
+		catch (Exception e){
+			model.addAttribute("erreur", "Le calendrier a été chargé!");
+		  return "espaceAdm";
 		}
 		
-	//	model.addAttribute("tests", tests);
-		return "admin";
+		
 
-	
-	}
-	
-	
-	
-	
+		return "espaceAdm";
 	
 		
+
+}
 	
+	@RequestMapping(value="/espaceAdmin")
+	public String espaceAdmin(Model model, @RequestParam String user, @RequestParam String password){
+		String error="";
+		model.addAttribute("listeAdm", services.getInfoAdmin(user,password));
+		User admin= new User ();
+		admin=services.getInfoAdmin(user, password);
+		if(admin !=null) {
+		if(admin.getUsager().contentEquals(user) && admin.getMotdepasse().contentEquals(password)) {
+			return "espaceAdm";}
+			else {
+				error="Vous n'étes pas connectés!";
+				return "connection";
+			}
+		
+		}
+		else 
+			model.addAttribute("error",error);
+			return "connection";
+		
 	
-	
+		
+	}
 	}

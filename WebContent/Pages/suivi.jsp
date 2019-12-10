@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<script type="text/javascript" src="./js/angular.js"></script>
-	<link rel="stylesheet" href="./css/style.css">
+	<link rel="stylesheet" href="./CSS/style.css">
     <title>Aeroport AMS | Suivi</title>
 </head>
 
@@ -38,7 +38,7 @@
 
 					<div class="col-sm-12">
 						<div class="col-sm-6 float-left colorFontWhite">
-							<H3>${vol[0].numVol}</H3>
+							<h3>${vol[0].numVol} </h3>
 							<p>${vol[0].idCompagnie}</p>
 						</div>
 						<div class="col-sm-6 float-right text-right">
@@ -132,23 +132,16 @@
 						
 					</div>
 					
-					<div class=" mt-3" style="text-align: center;">
-						
-						<a href="connection.aspx" class="btn btn-solid">INTRANET</a>
-
+					
+					<div class="date mt-5">
+					
+						<h4 class="powered"><span> Powered by Meryem, Assia, Amelia, Michael et Sebastian </span></h4>
 					</div>
+					
 			</div>	
 		</div>
 	</div>
 
-
-
-
-
-
-	
-	<a href="connection.aspx"> Connection</a>
-	
 </body>
 
 

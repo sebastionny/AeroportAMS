@@ -11,7 +11,6 @@ private String heurePanifie;
 private String idCompagnie;
 private String codeCalendrier;
 private String volDepart;
-
 public String getNumVol() {
 	return numVol;
 }

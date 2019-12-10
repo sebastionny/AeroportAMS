@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 import dao.Vol;
-import dao.client.Client;
-import dao.notification.Notification;
+import dao.Client;
+import dao.Notification;
 
 import services.NotificationMetier;
 import services.ClientMetier;
@@ -60,17 +60,33 @@ public class NotificationController  {
 	public String singNotification(Model model, @RequestParam String idVol, @RequestParam String telClient){
 		
 		model.addAttribute("vol", servicesVol.getVolByNumVol(idVol));
+		String mgs= null;
 		
-		try{	
-			servicesClient.addClient(new Client(telClient));
-			servicesNotification.addNotification(new Notification( new Random().nextInt(999999999) , telClient , idVol , true ));
+		try{
 			
-			model.addAttribute("mgs", "Notification enregistrée !!!!");
+			if(telClient == "" || telClient == null) {
+				mgs = "Il faut avoir un numéro valide.";
+				throw new Exception("Il faut avoir un numéro valide.");
+			}
+			if(!servicesClient.addClient(new Client(telClient)) ){
+				
+				if(!servicesNotification.addNotification(new Notification( new Random().nextInt(999999999) , telClient , idVol , true ))) {
+					mgs = "Vous suivez déjà cette vol";
+					throw new Exception("Vous suivez déjà cette vol");
+				}
+				mgs = "Notification enregistrée !!!!";
+			};
+			
+			servicesNotification.addNotification(new Notification( new Random().nextInt(999999999) , telClient , idVol , true ));
+			mgs = "Notification enregistrée !!!!";
+		
+			
+			model.addAttribute("mgs", mgs);
 		}
 		
 		catch (Exception e){
 
-			model.addAttribute("mgs", "Notification pas enregistrée!!!!");
+			model.addAttribute("mgs", mgs);
 		}
 
 		//model.addAttribute("vol", servicesVol.getVolByNumVol(id));

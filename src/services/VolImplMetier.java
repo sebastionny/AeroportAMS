@@ -6,6 +6,7 @@ import dao.User;
 import dao.Vol;
 import dao.Vol1;
 import dao.VolDAO;
+import dao.volajour;
 
 
 public class VolImplMetier implements VolMetier {
@@ -69,13 +70,22 @@ public class VolImplMetier implements VolMetier {
 	dao.addVol(v);
 		
 	}
-
 	public User getInfoAdmin(String user, String password) {
-		// TODO Auto-generated method stub
-		//return dao.getInfoAdmin(user);
+		
 		return dao.getInfoAdmin(user, password);
 	}
 
+
+
+	public void addVolaJour(volajour v) {
+		// TODO Auto-generated method stub
+		dao.addVolaJour(v);
+	}
+
+
+	public List<Vol> getVolByAer(String aer) {
+		return dao.getVolByAer(aer);
+	}
 
 
 	

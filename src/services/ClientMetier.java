@@ -2,13 +2,15 @@ package services;
 
 import java.util.List;
 
-import dao.client.Client;
+import dao.Client;
+
+
 
 
 
 public interface ClientMetier {
 
 	public List<Client> getAllClients();
-	public void addClient(Client c);
+	public boolean addClient(Client c);
 
 }

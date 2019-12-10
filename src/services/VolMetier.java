@@ -5,6 +5,7 @@ import java.util.List;
 import dao.User;
 import dao.Vol;
 import dao.Vol1;
+import dao.volajour;
 
 
 public interface VolMetier {
@@ -17,7 +18,8 @@ public interface VolMetier {
 	public List<Vol> getVolByAujVol();
 	public List<Vol> getVolByDemainVol();
 	public void addVol(Vol1 v);
+	public void addVolaJour(volajour v);
 	public User getInfoAdmin(String user, String password);
-	//public User getInfoAdmin(String user);
+	public List<Vol> getVolByAer(String aer); 
 	
 }

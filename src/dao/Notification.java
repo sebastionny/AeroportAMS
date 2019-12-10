@@ -1,4 +1,4 @@
-package dao.notification;
+package dao;
 
 public class Notification {
 	

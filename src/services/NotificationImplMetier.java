@@ -2,12 +2,9 @@ package services;
 
 import java.util.List;
 
-import dao.client.Client;
-import dao.notification.Notification;
-import dao.notification.NotificationDAO;
 
-
-
+import dao.Notification;
+import dao.NotificationDAO;
 public class NotificationImplMetier implements NotificationMetier {
 	
 	private NotificationDAO dao;
@@ -38,9 +35,9 @@ public class NotificationImplMetier implements NotificationMetier {
 	}
 	
 	
-	public void addNotification(Notification n) {
+	public boolean addNotification(Notification n) {
 		// TODO Auto-generated method stub
-		dao.addNotification(n);
+		return dao.addNotification(n);
 	}
 	
 	

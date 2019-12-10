@@ -4,7 +4,7 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-<class name="dao.notification.Notification" table="Notification" >
+<class name="dao.Notification" table="Notification" >
 
 	<id name="idNotification" column="idNotification"></id>
 	

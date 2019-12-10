@@ -4,7 +4,7 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-<class name="dao.client.Client" table="Client" >
+<class name="dao.Client" table="Client" >
 
 	<id name="telClient" column="telClient"> </id>
 	

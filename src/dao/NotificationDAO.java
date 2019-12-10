@@ -1,4 +1,4 @@
-package dao.notification;
+package dao;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ public interface NotificationDAO {
 
 	public List<Notification> getAllNotifications();
 
-	public void addNotification(Notification n);
+	public boolean addNotification(Notification n);
 
 	
 }

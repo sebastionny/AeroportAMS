@@ -12,7 +12,7 @@ public class VolImplDataBase implements VolDAO{
 	public List<Vol> getAllVols() {
 		Session session =  HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		return session.createQuery("from Vol").list();
+		return session.createQuery("from Vol where dateVol=current_date or dateVol=current_date+1").list();
 	}
 
 	
@@ -26,7 +26,7 @@ public class VolImplDataBase implements VolDAO{
 	public List<Vol> getVolByNumVol(String id) {
 		Session session =  HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		return session.createQuery("from Vol where numVol='"+id+"'").list();
+		return session.createQuery("from Vol where numVol='"+id+"' ").list();
 	}
 
 
@@ -79,7 +79,7 @@ public class VolImplDataBase implements VolDAO{
 		
 	}
 
-		public User getInfoAdmin(String user, String password) {
+public User getInfoAdmin(String user, String password) {
 		
 		Session session =  HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
@@ -89,19 +89,26 @@ public class VolImplDataBase implements VolDAO{
 		return adm;
 		}
 		else
-		
-		/*User u=(User)session.load(User.class,user);
-		return u;*/
-		//Query query = session.createQuery(sql);
-		//query.setString("username", username);
-		//query.setString("password", password);
-		//List<User> users = session.createQuery("from User where usager='"+user+"' and motdepasse='"+password+"'" ).list();
-		//if(users.size() == 0) {
-		//	return null;
-		//}
-		//return users.get(0);
+	
 		return null;
 	
+	}
+
+
+
+public void addVolaJour(volajour v) {
+	Session session =  HibernateUtil.getSessionFactory().getCurrentSession();
+	session.beginTransaction();
+	session.save(v);
+	session.getTransaction().commit();
+	
+	
+}
+
+public List<Vol> getVolByAer(String id) {
+	Session session =  HibernateUtil.getSessionFactory().getCurrentSession();
+	session.beginTransaction();
+	return session.createQuery("from Vol where aeroportDestination='"+id+"' or codeAerDepart='"+id+"'" ).list();
 	}
 
 

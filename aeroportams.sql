@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 05 Décembre 2019 à 22:38
+-- Généré le :  Lun 09 Décembre 2019 à 22:04
 -- Version du serveur :  5.6.20
 -- Version de PHP :  5.5.15
 
@@ -40,7 +40,9 @@ INSERT INTO `aeroport` (`codeAer`, `nomAer`, `idVille`) VALUES
 ('a1', 'Trudeau', 'v1'),
 ('a2', 'Mirabel', 'v1'),
 ('a3', 'Pearson', 'v2'),
-('a4', 'Stanfield', 'v4');
+('a4', 'Stanfield', 'v4'),
+('a5', 'Jean Lesage', 'v3'),
+('a6', 'Billy Bishop', 'v2');
 
 -- --------------------------------------------------------
 
@@ -58,10 +60,9 @@ CREATE TABLE IF NOT EXISTS `calendrier` (
 --
 
 INSERT INTO `calendrier` (`codeCalendrier`, `dateCalendrier`) VALUES
-('cal1', '2019-12-04'),
-('cal2', '2019-12-05'),
-('cal3', '2019-12-05'),
-('cal4', '2019-12-05');
+('cal1', '2018-12-09'),
+('cal2', '2019-06-09'),
+('cal3', '2019-12-09');
 
 -- --------------------------------------------------------
 
@@ -72,14 +73,6 @@ INSERT INTO `calendrier` (`codeCalendrier`, `dateCalendrier`) VALUES
 CREATE TABLE IF NOT EXISTS `client` (
   `telClient` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Contenu de la table `client`
---
-
-INSERT INTO `client` (`telClient`) VALUES
-('(514) 321-7659'),
-('(514) 765-2314');
 
 -- --------------------------------------------------------
 
@@ -98,10 +91,14 @@ CREATE TABLE IF NOT EXISTS `compagnie` (
 --
 
 INSERT INTO `compagnie` (`idCompagnie`, `nomCompagnie`, `adrCompagnie`) VALUES
-('comp1', 'AIR CANADA', 'adresse1'),
-('comp2', 'AIR CHINA', 'adresse2'),
-('comp3', 'AER LINGUS', 'adresse3'),
-('comp4', 'BRUSSELS AIRLINES', 'adresse4');
+('comp1', 'AIR CANADA', '1234, air canada'),
+('comp2', 'AIR CHINA', '1234, air china'),
+('comp3', 'AER LINGUS', '1234, aer lingus'),
+('comp4', 'AIR TRANSAT', '1234, air transat'),
+('comp5', 'AIR NORTH', '1234, Air North'),
+('comp6', 'FIRST AIR', '1234, First Air'),
+('comp7', 'AIR MIKISEW', '1234, Air Mikisew '),
+('comp8', 'AIR INUIT', '1234, Air Inuit ');
 
 -- --------------------------------------------------------
 
@@ -123,8 +120,8 @@ CREATE TABLE IF NOT EXISTS `notification` (
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
-  `usager` varchar(20) NOT NULL,
-  `motdepasse` varchar(20) NOT NULL
+  `usager` varchar(255) NOT NULL,
+  `motdepasse` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -132,7 +129,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`usager`, `motdepasse`) VALUES
-('admin', '123');
+('admin', '123'),
+('ams', '123');
 
 -- --------------------------------------------------------
 
@@ -180,55 +178,14 @@ CREATE TABLE IF NOT EXISTS `vol` (
 
 CREATE TABLE IF NOT EXISTS `vol1` (
   `numVol` varchar(10) NOT NULL,
-  `codeAerDepart` varchar(10) NOT NULL,
-  `dateVol` date NOT NULL,
-  `aeroportDestination` varchar(10) NOT NULL,
-  `heurePanifie` time NOT NULL,
-  `idCompagnie` varchar(10) NOT NULL,
-  `codeCalendrier` varchar(10) NOT NULL,
-  `volDepart` tinyint(1) NOT NULL
+  `codeAerDepart` varchar(10) DEFAULT NULL,
+  `dateVol` date DEFAULT NULL,
+  `aeroportDestination` varchar(10) DEFAULT NULL,
+  `heurePanifie` time DEFAULT NULL,
+  `idCompagnie` varchar(10) DEFAULT NULL,
+  `codeCalendrier` varchar(10) DEFAULT NULL,
+  `volDepart` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Contenu de la table `vol1`
---
-
-INSERT INTO `vol1` (`numVol`, `codeAerDepart`, `dateVol`, `aeroportDestination`, `heurePanifie`, `idCompagnie`, `codeCalendrier`, `volDepart`) VALUES
-('A33077', 'a1', '2019-12-05', 'a2', '06:00:00', 'comp2', 'cal2', 1),
-('AC781', 'a2', '2019-12-04', 'a3', '04:20:06', 'comp4', 'cal3', 1),
-('AC8904', 'a1', '2019-12-04', 'a2', '03:07:13', 'comp1', 'cal1', 0),
-('AM637', 'a2', '2019-12-05', 'a2', '07:00:00', 'comp3', 'cal3', 1),
-('LH6561', 'a3', '2019-12-05', 'a1', '10:08:15', 'comp1', 'cal1', 0),
-('SN9596', 'a1', '2019-12-04', 'a3', '09:00:00', 'comp2', 'cal1', 0);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `vol2`
---
-
-CREATE TABLE IF NOT EXISTS `vol2` (
-  `volDepart` tinyint(1) NOT NULL,
-  `numVol` varchar(10) NOT NULL,
-  `idCompagnie` varchar(50) NOT NULL,
-  `codeAerDepart` varchar(50) NOT NULL,
-  `aeroportDestination` varchar(50) NOT NULL,
-  `heurePanifie` time NOT NULL,
-  `heureEstime` time NOT NULL,
-  `statutChange` varchar(20) NOT NULL,
-  `idVille` varchar(50) NOT NULL,
-  `dateVol` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Contenu de la table `vol2`
---
-
-INSERT INTO `vol2` (`volDepart`, `numVol`, `idCompagnie`, `codeAerDepart`, `aeroportDestination`, `heurePanifie`, `heureEstime`, `statutChange`, `idVille`, `dateVol`) VALUES
-(1, 'A33077', 'AIR CHINA', 'Trudeau', 'Mirabel', '06:00:00', '08:15:21', 'Retardé', 'Montréal', '2019-12-05'),
-(0, 'AC8904', 'AIR CANADA', 'Trudeau', 'Mirabel', '03:07:13', '07:00:00', 'arrivé', 'Montréal', '2019-12-04'),
-(1, 'AC781', 'BRUSSELS AIRLINES', 'Mirabel', 'Pearson', '04:20:06', '05:00:00', 'Retardé', 'Montréal', '2019-12-04'),
-(1, 'AM637', 'AER LINGUS', 'Mirabel', 'Mirabel', '07:00:00', '12:32:00', 'retardé', 'Montréal', '2019-12-05');
 
 -- --------------------------------------------------------
 
@@ -238,19 +195,10 @@ INSERT INTO `vol2` (`volDepart`, `numVol`, `idCompagnie`, `codeAerDepart`, `aero
 
 CREATE TABLE IF NOT EXISTS `volajour` (
   `numVol` varchar(10) NOT NULL,
-  `heureEstime` time NOT NULL,
-  `statutChange` varchar(20) NOT NULL
+  `dateVol` date DEFAULT NULL,
+  `heureEstime` time DEFAULT NULL,
+  `statutChange` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Contenu de la table `volajour`
---
-
-INSERT INTO `volajour` (`numVol`, `heureEstime`, `statutChange`) VALUES
-('A33077', '08:15:21', 'Retardé'),
-('AC781', '05:00:00', 'Retardé'),
-('AC8904', '07:00:00', 'arrivé'),
-('AM637', '12:32:00', 'retardé');
 
 -- --------------------------------------------------------
 
@@ -259,7 +207,7 @@ INSERT INTO `volajour` (`numVol`, `heureEstime`, `statutChange`) VALUES
 --
 DROP TABLE IF EXISTS `vol`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vol` AS select `v`.`volDepart` AS `volDepart`,`va`.`numVol` AS `numVol`,`c`.`nomCompagnie` AS `idCompagnie`,`a`.`nomAer` AS `codeAerDepart`,`a2`.`nomAer` AS `aeroportDestination`,`v`.`heurePanifie` AS `heurePanifie`,`va`.`heureEstime` AS `heureEstime`,`va`.`statutChange` AS `statutChange`,`vl`.`nomVille` AS `idVille`,`v`.`dateVol` AS `dateVol` from (((((`vol1` `v` join `volajour` `va` on((`v`.`numVol` = `va`.`numVol`))) join `aeroport` `a` on((`v`.`codeAerDepart` = `a`.`codeAer`))) join `aeroport` `a2` on((`v`.`aeroportDestination` = `a2`.`codeAer`))) join `ville` `vl` on((`a`.`idVille` = `vl`.`idVille`))) join `compagnie` `c` on((`v`.`idCompagnie` = `c`.`idCompagnie`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vol` AS select `v`.`volDepart` AS `volDepart`,`va`.`numVol` AS `numVol`,`c`.`nomCompagnie` AS `idCompagnie`,`a`.`nomAer` AS `codeAerDepart`,`a2`.`nomAer` AS `aeroportDestination`,`v`.`heurePanifie` AS `heurePanifie`,`va`.`heureEstime` AS `heureEstime`,`va`.`statutChange` AS `statutChange`,`vl`.`nomVille` AS `idVille`,`v`.`dateVol` AS `dateVol` from (((((`vol1` `v` join `volajour` `va` on((`v`.`numVol` = `va`.`numVol`))) join `aeroport` `a` on((`v`.`codeAerDepart` = `a`.`codeAer`))) join `aeroport` `a2` on((`v`.`aeroportDestination` = `a2`.`codeAer`))) join `ville` `vl` on((`a`.`idVille` = `vl`.`idVille`))) join `compagnie` `c` on((`v`.`idCompagnie` = `c`.`idCompagnie`))) where ((`v`.`dateVol` = curdate()) or (`v`.`dateVol` = (curdate() + 1)));
 
 --
 -- Index pour les tables exportées
@@ -317,7 +265,7 @@ ALTER TABLE `vol1`
 -- Index pour la table `volajour`
 --
 ALTER TABLE `volajour`
- ADD PRIMARY KEY (`numVol`), ADD KEY `numVol` (`numVol`);
+ ADD PRIMARY KEY (`numVol`), ADD KEY `numVol` (`numVol`), ADD KEY `dateVol` (`dateVol`);
 
 --
 -- Contraintes pour les tables exportées

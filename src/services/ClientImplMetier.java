@@ -2,8 +2,8 @@ package services;
 
 import java.util.List;
 
-import dao.client.Client;
-import dao.client.ClientDAO;
+import dao.Client;
+import dao.ClientDAO;
 
 
 public class ClientImplMetier implements ClientMetier {
@@ -39,9 +39,9 @@ public class ClientImplMetier implements ClientMetier {
 
 
 
-	public void addClient(Client c) {
+	public boolean addClient(Client c) {
 		// TODO Auto-generated method stub
-		dao.addClient(c);
+		return dao.addClient(c);
 		
 	}
 

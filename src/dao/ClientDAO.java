@@ -1,4 +1,4 @@
-package dao.client;
+package dao;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ public interface ClientDAO {
 	
 
 	public List<Client> getAllClients();
-	public void addClient(Client c);
+	public boolean addClient(Client c);
 	
 
 	
