@@ -15,9 +15,6 @@
     <title>Aeroport AMS</title>
 </head>
 
-
-
-
 <body ng-app="myApp">
 
 	<div class="container">
@@ -29,11 +26,14 @@
 					    <div class="col-sm-3">
 					            <h1>Vols</h1>
 					    </div>
-					    <div class="col-sm-6">
+					    <div class="col-sm-5">
 					        <p>DERNIÉR MISE À JOUR <span>IL Y A 10 MIN</span></p>
 					    </div>
-					    <div class="col-sm-3">
-					            <a href="filtreD.aspx" class="col-sm-6">
+					    <div class="col-sm-4">
+					            <a href="index.aspx" class="">
+					                <img src="./img/tousBtn.png"  class="img-fluid" alt="Départ"/>
+					            </a>
+					            <a href="filtreD.aspx" class="">
 					                <img src="./img/departBtn.png"  class="img-fluid" alt="Départ"/>
 					            </a>
 					            <a href="filtreA.aspx" class="">
@@ -43,10 +43,9 @@
 					</div>
 				</div>
 			
-							<div class="row">
-				<div class="col-sm-12"><h2>Recherche par:</h2> </div>
+				<div class="row">
+					<div class="col-sm-12"><h2>Recherche par:</h2> </div>
 				
-					
 					<div class="col-sm-4">
 						<form action="searchVol.aspx" method="post">
 					<div class="form-group mb-2">
@@ -70,11 +69,13 @@
 						</form>
 					</div>
 					  
-					
-					
+					<div class="col-sm-12">
+						<hr/>
+						<h2>${titre}</h2>
+					</div>			
 		
-					</div>
-					<hr/>
+				</div>
+				
 					
 					<table border="1" width="100%">
 						<tr class="headTable">
@@ -122,8 +123,8 @@
 						
 						<div class=" mt-3">
 						
-						<a href="filtreAuj.aspx" class="btn btn-solid col-6">AUJOURD’HUI</a>
-						<a href="filtreDemain.aspx" class="btn btn-line col-6">DEMAIN</a>
+						<a href="filtreAuj.aspx" class="btn btn-line ${activeAuj}">AUJOURD’HUI</a>
+						<a href="filtreDemain.aspx" class="btn btn-line ${activeDem} col-6">DEMAIN</a>
 					</div>
 					<div class="date mt-5">
 					

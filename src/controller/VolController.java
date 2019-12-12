@@ -87,6 +87,8 @@ public class VolController  {
 		
 		
 		model.addAttribute("listeVols", services.getVolByAujVol());
+		model.addAttribute("activeAuj", "btn-solid");
+		model.addAttribute("titre", "AUJOURD'HUI");
 		
 		return "index";
 		
@@ -96,6 +98,8 @@ public class VolController  {
 		
 		
 		model.addAttribute("listeVols", services.getVolByDemainVol());
+		model.addAttribute("activeDem", "btn-solid");
+		model.addAttribute("titre", "DEMAIN");
 		
 		return "index";
 		

@@ -81,23 +81,23 @@ body {
 
 .logo{max-width: 260px!important;}
 
-.btn-solid{
-  border-radius: 20px!important;
-  font-size: 0.8em!important;
-  padding: 2px 18px!important;
-  background: #ED1250!important;
-  color: #fff!important;
-  font-family: 'Rajdhani', sans-serif!important;
-  border: 1px solid #ED1250!important;
-}
-
-
 .btn-line{
   border-radius: 20px!important;
   font-size: 0.8em!important;
   padding: 2px 15px!important;
   background: #fff!important;
   color: #042F4B!important;
+  font-family: 'Rajdhani', sans-serif!important;
+  border: 1px solid #ED1250!important;
+}
+
+
+.btn-line:hover , .btn-solid{
+  border-radius: 20px!important;
+  font-size: 0.8em!important;
+  padding: 2px 18px!important;
+  background: #ED1250!important;
+  color: #fff!important;
   font-family: 'Rajdhani', sans-serif!important;
   border: 1px solid #ED1250!important;
 }
@@ -144,6 +144,7 @@ body {
 .head .row{ max-height: 80px; }
 .head .row img{max-width: 60px!important;}
  
+.head .col-sm-4:last-child{ text-align: right;}
  
 .notification{
 	background: #ED1251;
