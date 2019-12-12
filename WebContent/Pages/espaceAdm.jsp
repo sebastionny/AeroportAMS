@@ -43,16 +43,16 @@
 						</div>
 				</div>
 					   
-					   <div class="container row">
+					   <div class="container row ">
 							<div class="col-sm-6">
 									<form action="processus.aspx" method="post" >
 										<div class="form-group h100 pbottom">
 								
-									<div class="card text-center cards">
+									<div class="card text-center cards h-100">
       								<div class="card-header">DÉMARRER/ARRÊTER LE PROCESSUS
       								</div>
      								<div class="card-body">
-     								<p>Cliquez sur le bouton pour arrêter ou démarrer le processus</p>
+     								<p>Cliquez ici pour arrêter ou démarrer le processus</p>
      									<div class="h30">
 											<button type="submit" class="btn btn-primary">DÉMARRER</button>
         							</div>
@@ -72,10 +72,11 @@
 									<div class="card text-center cards">
       								<div class="card-header">CHARGER CALENDRIER
       								</div>
-     								<div class="card-body mt-2">
-     								
-               							<div class="h30">
-               							<button type="submit" class="btn btn-primary">CHARGER</button>
+     								<div class="card-body">
+     								<p>Cliquez ici charger le calendrier</p>
+               							<div class="h30" >
+               				
+      									<button type="submit" class="btn btn-primary">CHARGER</button>
                							</div>									
             						</div>
      				     			</div>		
