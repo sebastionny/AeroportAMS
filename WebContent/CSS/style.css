@@ -3,7 +3,14 @@
 @import url('https://fonts.googleapis.com/css?family=Rajdhani:300,500,700&display=swap');
 
 
+.row{
+ overflow: hidden; 
+}
 
+[class*="col-"]{
+ margin-bottom: -99999px;
+ padding-bottom: 99999px;
+}
 
 h3{
 
