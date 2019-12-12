@@ -1,2 +1,3 @@
 ./src/Hibernate.cfg.xml
 ./WebContent/WEB-INF/lib/
+/build/
