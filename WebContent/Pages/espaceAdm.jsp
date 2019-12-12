@@ -52,7 +52,7 @@
       								<div class="card-header">DÉMARRER/ARRÊTER LE PROCESSUS
       								</div>
      								<div class="card-body">
-     								<p>Cliquez sur le bouton pour arrêter ou démarrer le processus</p>
+     								<p>Cliquez ici pour arrêter ou démarrer le processus</p>
      									<div class="h30">
 											<button type="submit" class="btn btn-primary">DÉMARRER</button>
         							</div>
@@ -72,8 +72,8 @@
 									<div class="card text-center cards">
       								<div class="card-header">CHARGER CALENDRIER
       								</div>
-     								<div class="card-body mt-2">
-     								
+     								<div class="card-body">
+     								<p>Cliquez ici charge le calendrier</p>
                							<div class="h30">
                							<button type="submit" class="btn btn-primary">CHARGER</button>
                							</div>									
