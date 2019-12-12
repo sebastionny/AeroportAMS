@@ -26,6 +26,7 @@ public class VolImplDataBase implements VolDAO{
 	public List<Vol> getVolByNumVol(String id) {
 		Session session =  HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
+		id=id.trim();
 		return session.createQuery("from Vol where numVol='"+id+"' ").list();
 	}
 
@@ -34,6 +35,7 @@ public class VolImplDataBase implements VolDAO{
 	public List<Vol> getVolByComp(String id) {
 		Session session =  HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
+
 		return session.createQuery("from Vol where idCompagnie='"+id+"'").list();
 	}
 
@@ -108,6 +110,7 @@ public void addVolaJour(volajour v) {
 public List<Vol> getVolByAer(String id) {
 	Session session =  HibernateUtil.getSessionFactory().getCurrentSession();
 	session.beginTransaction();
+	id=id.trim();
 	return session.createQuery("from Vol where aeroportDestination='"+id+"' or codeAerDepart='"+id+"'" ).list();
 	}
 
