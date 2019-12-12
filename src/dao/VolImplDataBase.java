@@ -35,7 +35,7 @@ public class VolImplDataBase implements VolDAO{
 	public List<Vol> getVolByComp(String id) {
 		Session session =  HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		id=id.trim();
+
 		return session.createQuery("from Vol where idCompagnie='"+id+"'").list();
 	}
 
