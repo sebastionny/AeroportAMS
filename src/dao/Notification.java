@@ -1,11 +1,11 @@
 package dao;
 
-import java.sql.Date;
-import java.sql.Time;
+
+import java.util.Date;
 
 public class Notification {
 	
-	private Integer idNotification;
+	
 	private String telClient;
     private String numVol;
     private boolean arret;
@@ -17,7 +17,9 @@ public class Notification {
 	}
     
    
-    public Notification(Integer idNotification, String telClient, String numVol,boolean arret) {
+       
+    
+	public Notification(String telClient, String numVol, Date dateVol, boolean arret, Integer idNotification) {
 		super();
 		this.idNotification = idNotification;
 		this.telClient = telClient;
@@ -27,12 +29,6 @@ public class Notification {
     
 
 
-
-
-	public Integer getIdNotification() {
-		return idNotification;
-	}
-	public void setIdNotification(Integer idNotification) {
 		this.idNotification = idNotification;
 	}
 	public String getTelClient() {

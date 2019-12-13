@@ -64,20 +64,24 @@ public class NotificationController  {
 		
 		try{
 			
+			Date date = new Date();
+			System.out.println("--------> date: " + date);
+			
 			if(telClient == "" || telClient == null) {
 				mgs = "Il faut avoir un numéro valide.";
 				throw new Exception("Il faut avoir un numéro valide.");
 			}
 			if(!servicesClient.addClient(new Client(telClient)) ){
 				
-				if(!servicesNotification.addNotification(new Notification( new Random().nextInt(999999999) , telClient , idVol , true ))) {
+				
+				if(!servicesNotification.addNotification(new Notification( telClient , idVol , date ,true,  new Random().nextInt(999999999) ))) {
 					mgs = "Vous suivez déjà cette vol";
 					throw new Exception("Vous suivez déjà cette vol");
 				}
 				mgs = "Notification enregistrée !!!!";
 			};
 			
-			servicesNotification.addNotification(new Notification( new Random().nextInt(999999999) , telClient , idVol , true ));
+			servicesNotification.addNotification(new Notification( telClient , idVol , date ,true,  new Random().nextInt(999999999)));
 			mgs = "Notification enregistrée !!!!";
 		
 			
