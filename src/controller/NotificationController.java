@@ -81,12 +81,7 @@ public class NotificationController  {
 			}
 			if(!servicesClient.addClient(new Client(telClient)) ){
 				
-<<<<<<< HEAD
-				if(!servicesNotification.addNotification(new Notification( new Random().nextInt(999999999),telClient, idVol,true))) {
-=======
-				
-				if(!servicesNotification.addNotification(new Notification( telClient , idVol , date ,true,  new Random().nextInt(999999999) ))) {
->>>>>>> refs/heads/master
+if(!servicesNotification.addNotification(new Notification( telClient , idVol , date ,true,  new Random().nextInt(999999999) ))) {
 					mgs = "Vous suivez déjà cette vol";
 					throw new Exception("Vous suivez déjà cette vol");
 				}
@@ -98,6 +93,7 @@ public class NotificationController  {
 			mgs = "Notification enregistrée !!!!";
 			
 			envoyer (telClient, idVol);
+			model.addAttribute("mgs", mgs);
 
 			    
 			   
