@@ -118,7 +118,7 @@ public class VolController  {
 	
 	@RequestMapping(value="/chargerFichier")
 	public String chargerFichier(Model model) throws ParseException{
-	String fichier ="/Users/tallernait/Documents/workspace/AeroportAMS/calendrier.txt";
+	String fichier ="calendrier.txt";
 		ArrayList<String> liste=new ArrayList<String>();
 		ArrayList<Vol1> tests=new ArrayList<Vol1>();
 

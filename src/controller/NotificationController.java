@@ -1,8 +1,12 @@
 package controller;
 
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -19,7 +23,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 import dao.Vol;
 import dao.Client;
 import dao.Notification;
@@ -28,7 +31,7 @@ import services.NotificationMetier;
 import services.ClientMetier;
 import services.VolMetier;
 
-
+import dao.SmsSender;
 
 @Controller
 public class NotificationController  {
@@ -42,7 +45,13 @@ public class NotificationController  {
 	@Autowired
 	ClientMetier servicesClient;
 	
+	
 
+	
+	 public static final String ACCOUNT_SID =
+	            "ACdaf9e77122642250ed133c62a33a50a0";
+	    public static final String AUTH_TOKEN =
+	            "208832827ba51f900b10078f6aaba444";
 	
 	// Il recupere l'information du vol a suivre
 	
@@ -57,8 +66,7 @@ public class NotificationController  {
 	
 	// Il enregistre le client y demarre le notificación.
 	@RequestMapping(value="/savesuivi")
-	public String singNotification(Model model, @RequestParam String idVol, @RequestParam String telClient){
-		
+	public String singNotification(Model model,  @RequestParam String telClient ,  @RequestParam String idVol){
 		model.addAttribute("vol", servicesVol.getVolByNumVol(idVol));
 		String mgs= null;
 		
@@ -73,20 +81,25 @@ public class NotificationController  {
 			}
 			if(!servicesClient.addClient(new Client(telClient)) ){
 				
-				
-				if(!servicesNotification.addNotification(new Notification( telClient , idVol , date ,true,  new Random().nextInt(999999999) ))) {
+if(!servicesNotification.addNotification(new Notification( telClient , idVol , date ,true,  new Random().nextInt(999999999) ))) {
 					mgs = "Vous suivez déjà cette vol";
 					throw new Exception("Vous suivez déjà cette vol");
 				}
+				
 				mgs = "Notification enregistrée !!!!";
 			};
 			
 			servicesNotification.addNotification(new Notification( telClient , idVol , date ,true,  new Random().nextInt(999999999)));
 			mgs = "Notification enregistrée !!!!";
-		
 			
+			envoyer (telClient, idVol);
 			model.addAttribute("mgs", mgs);
+
+			    
+			   
+		
 		}
+		
 		
 		catch (Exception e){
 
@@ -96,7 +109,20 @@ public class NotificationController  {
 		//model.addAttribute("vol", servicesVol.getVolByNumVol(id));
 		return "suivi";
 		
+	
 	}
+	
+	 public static void envoyer (String telClient, String numVol) {
+	    	
+	   Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+	            Message message = Message
+	                .creator(new PhoneNumber(telClient), // to
+	                        new PhoneNumber("+14172044780"), // from 
+	                        "Vous �tes inscrit pour le vol " + numVol )
+	                .create();
+	        System.out.println(message.getSid());
+	    	
+	    }
 	
 	
 }

@@ -104,10 +104,5 @@ public class Notification {
 		return "Notification [telClient=" + telClient + ", numVol=" + numVol + ", dateVol=" + dateVol + ", arret="
 				+ arret + ", idNotification=" + idNotification + "]";
 	}
-    
-    
-    
-    
-
-	
+    	
 }
