@@ -49,9 +49,9 @@ public class NotificationController  {
 
 	
 	 public static final String ACCOUNT_SID =
-	            "ACdaf9e77122642250ed133c62a33a50a0";
+	            " ";
 	    public static final String AUTH_TOKEN =
-	            "208832827ba51f900b10078f6aaba444";
+	            " ";
 	
 	// Il recupere l'information du vol a suivre
 	
