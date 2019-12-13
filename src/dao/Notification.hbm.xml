@@ -10,6 +10,7 @@
 	
 	<property name="telClient" column="telClient"></property>
 	<property name="numVol" column="numVol"></property>
+	<property name="dateVol" column="dateVol"></property>
 	<property name="arret" column="arret"></property>
 	
 </class>
