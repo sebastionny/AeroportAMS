@@ -49,9 +49,9 @@ public class NotificationController  {
 
 	
 	 public static final String ACCOUNT_SID =
-	            "ACdaf9e77122642250ed133c62a33a50a0";
+	            " ";
 	    public static final String AUTH_TOKEN =
-	            "208832827ba51f900b10078f6aaba444";
+	            " ";
 	
 	// Il recupere l'information du vol a suivre
 	
@@ -117,7 +117,7 @@ if(!servicesNotification.addNotification(new Notification( telClient , idVol , d
 	   Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 	            Message message = Message
 	                .creator(new PhoneNumber(telClient), // to
-	                        new PhoneNumber("+14172044780"), // from 
+	                        new PhoneNumber("+14107775709"), // from 
 	                        "Vous êtes inscrit pour le vol " + numVol )
 	                .create();
 	        System.out.println(message.getSid());
