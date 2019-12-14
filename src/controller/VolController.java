@@ -11,6 +11,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.aspectj.weaver.ast.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +31,13 @@ import services.VolMetier;
 
 @Controller
 public class VolController  {
-	
+	Timer processus1;
+	boolean demarer=true;
+	String Demarre="Demarrer";
+	String mge="le Processus est arreté Cliquez sur le bouton pour le démarrer";
 	@Autowired
 	VolMetier services;
+	
 
 	// index.jsp
 	@RequestMapping(value="/index")
@@ -40,6 +46,88 @@ public class VolController  {
 		model.addAttribute("listeVols", services.getAllVols());
 		return "index";
 		
+	}
+	@RequestMapping(value="/processus")
+	public String pageProcessus(Model model){
+		
+	if(demarer==true) {
+		Demarre="Arreter";
+	
+		mge="le Processus est demarré Cliquez sur le bouton pour l'arreter";
+		demarer=false;
+		processus1=new Timer();
+		processus1.schedule(new TimerTask()  {
+		
+			@Override
+			public void run()  {
+				String fichier ="C:\\Users\\assia\\Desktop\\majour.txt";
+				ArrayList<String> liste=new ArrayList<String>();
+			
+				String chaine="";
+
+				//lecture du fichier texte
+				try{
+				  InputStream ips=new FileInputStream(fichier);
+				  InputStreamReader ipsr=new InputStreamReader(ips);
+				  BufferedReader br=new BufferedReader(ipsr);
+				  String ligne;
+				  while ((ligne=br.readLine())!=null){
+					
+					  liste.add(ligne);
+					
+				  }
+				  br.close();
+
+
+			
+				}    
+				catch (Exception e){
+				
+				}
+				try{
+				for (String l : liste) {
+				String[]  mots = l.split(",");
+					System.out.println("ok1");
+		/*volajour va=new volajour(); 
+				va.setNumVol(mots[0]);*/
+					System.out.println("ok1");
+					Date date=new SimpleDateFormat("yyyy-MM-dd").parse(mots[1]);
+					System.out.println("ok1");
+				/*	
+					va.setDateVol(date);
+					va.setHeureEstime(mots[2]);
+					va.setStatutChange(mots[3]);*/
+					System.out.println("ok1");
+				services.updateVol(mots[0], date, mots[2], mots[3]);
+				//services.addVolaJour(va);
+				System.out.println("ok1");
+			
+				
+					
+				}
+				liste.clear();
+					
+				}catch (Exception e){
+					System.out.println("");
+				}}
+		}, 1000,10*1000);
+	}else {
+		demarer=true;
+		Demarre="Demarrer";
+		mge="le Processus est arreté Cliquez sur le bouton pour le démarrer";
+		processus1.cancel();
+		
+		
+	}
+	model.addAttribute("Demarre", Demarre);
+	model.addAttribute("mge", mge);
+	
+		
+					return "espaceAdm";
+			
+	
+		
+
 	}
 
 	@RequestMapping(value="/searchVol")
@@ -60,7 +148,8 @@ public class VolController  {
 	@RequestMapping(value="/espaceAdm")
 	public String pageConnection(Model model){
 		
-	
+		model.addAttribute("Demarre", Demarre);
+		model.addAttribute("mge", mge);
 		return "espaceAdm";
 		
 	}
@@ -206,6 +295,8 @@ public class VolController  {
 		}
 		else 
 			model.addAttribute("error",error);
+		model.addAttribute("Demarre", Demarre);
+		model.addAttribute("mge", mge);
 			return "connection";
 		
 	

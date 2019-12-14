@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.Date;
 import java.util.List;
 
 public interface VolDAO {
@@ -16,6 +17,8 @@ public interface VolDAO {
 	public void addVolaJour(volajour v);
 	public User getInfoAdmin(String user, String password);
 	public List<Vol> getVolByAer(String aer); 
+	public void updateVol(String id,Date date,String heurEst,String status);
+
 
 	
 }

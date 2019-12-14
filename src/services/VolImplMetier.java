@@ -1,5 +1,6 @@
 package services;
 
+import java.util.Date;
 import java.util.List;
 
 import dao.User;
@@ -85,6 +86,13 @@ public class VolImplMetier implements VolMetier {
 
 	public List<Vol> getVolByAer(String aer) {
 		return dao.getVolByAer(aer);
+	}
+
+
+
+	public void updateVol(String id, Date date, String heurEst, String status) {
+		dao.updateVol(id, date, heurEst, status);
+		
 	}
 
 

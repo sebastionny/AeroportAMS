@@ -52,9 +52,9 @@
       								<div class="card-header">DÉMARRER/ARRÊTER LE PROCESSUS
       								</div>
      								<div class="card-body">
-     								<p>Cliquez ici pour arrêter ou démarrer le processus</p>
+     								<p>${mge}</p>
      									<div class="h30">
-											<button type="submit" class="btn btn-primary">DÉMARRER</button>
+											<button type="submit" class="btn btn-primary">${Demarre}</button>
         							</div>
         							</div>      								
     								</div>

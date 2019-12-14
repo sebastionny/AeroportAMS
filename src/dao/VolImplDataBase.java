@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -113,6 +114,21 @@ public List<Vol> getVolByAer(String id) {
 	id=id.trim();
 	return session.createQuery("from Vol where aeroportDestination='"+id+"' or codeAerDepart='"+id+"'" ).list();
 	}
+
+
+
+public void updateVol(String id, Date date, String heurEst, String status) {
+	Session session =  HibernateUtil.getSessionFactory().getCurrentSession();
+	session.beginTransaction();
+	 volajour vol = (volajour) session.createQuery("from volajour where numVol='"+id+"' ").uniqueResult();
+	// volajour vol = (volajour) session.createQuery("from volajour where numVol='"+id+"' and dateVol="+date).uniqueResult();
+	 vol.setHeureEstime(heurEst);
+	 vol.setStatutChange(status);
+     session.update(vol);
+     session.getTransaction().commit();
+     
+	
+}
 
 
 
