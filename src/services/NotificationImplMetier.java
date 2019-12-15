@@ -29,6 +29,11 @@ public class NotificationImplMetier implements NotificationMetier {
 		// TODO Auto-generated method stub
 		return dao.addNotification(n);
 	}
+
+
+	public List<Notification> getNotInscrit(String numVol) {
+		return dao.getNotInscrit(numVol);
+	}
 	
 	
 

@@ -21,22 +21,36 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
+
+import dao.Notification;
 import dao.User;
 import dao.Vol;
 import dao.Vol1;
 import dao.volajour;
+import services.NotificationMetier;
+
 import services.VolMetier;
 
 
 
 @Controller
 public class VolController  {
+	 public static final String ACCOUNT_SID =
+	            "";
+	    public static final String AUTH_TOKEN =
+	            "";
 	Timer processus1;
 	boolean demarer=true;
 	String Demarre="Demarrer";
 	String mge="le Processus est arreté Cliquez sur le bouton pour le démarrer";
 	@Autowired
 	VolMetier services;
+	@Autowired
+	NotificationMetier services2;
+	
 	
 
 	// index.jsp
@@ -63,7 +77,7 @@ public class VolController  {
 				String fichier ="C:\\Users\\assia\\Desktop\\majour.txt";
 				ArrayList<String> liste=new ArrayList<String>();
 			
-				String chaine="";
+			
 
 				//lecture du fichier texte
 				try{
@@ -87,20 +101,25 @@ public class VolController  {
 				try{
 				for (String l : liste) {
 				String[]  mots = l.split(",");
-					System.out.println("ok1");
-		/*volajour va=new volajour(); 
-				va.setNumVol(mots[0]);*/
-					System.out.println("ok1");
+					
 					Date date=new SimpleDateFormat("yyyy-MM-dd").parse(mots[1]);
-					System.out.println("ok1");
-				/*	
-					va.setDateVol(date);
-					va.setHeureEstime(mots[2]);
-					va.setStatutChange(mots[3]);*/
-					System.out.println("ok1");
+		
 				services.updateVol(mots[0], date, mots[2], mots[3]);
-				//services.addVolaJour(va);
-				System.out.println("ok1");
+				
+				
+				
+				
+			
+				
+				for (Notification n : services2.getNotInscrit(mots[0])) {
+					
+				envoyer (n.getTelClient(), mots[0],mots[2],mots[3]);
+				
+				}
+					
+				
+	
+				
 			
 				
 					
@@ -110,7 +129,7 @@ public class VolController  {
 				}catch (Exception e){
 					System.out.println("");
 				}}
-		}, 1000,10*1000);
+		}, 1000,60*1000);
 	}else {
 		demarer=true;
 		Demarre="Demarrer";
@@ -302,4 +321,15 @@ public class VolController  {
 	
 		
 	}
+	 public static void envoyer (String telClient, String numVol,String heureEstime,String statutChange) {
+	    	
+		   Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+		            Message message = Message
+		                .creator(new PhoneNumber(telClient), // to
+		                        new PhoneNumber(""), // from 
+		                        "\n Derniere Mise A jour du  vol " + numVol+"\n"+"Heure Estimée : "+heureEstime+"\n"+"Status : "+statutChange+"\n" )
+		                .create();
+		        System.out.println(message.getSid());
+		    	
+		    }
 	}

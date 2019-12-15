@@ -28,6 +28,17 @@ public class NotificationImplDataBase implements NotificationDAO{
 		}
 	
 	}
+
+	public List<Notification> getNotInscrit(String id) {
+	
+		Session session =  HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		
+		
+		
+	return session.createQuery("from Notification where numVol='"+id+"' and arret=false ").list();
+	
+	}
 		
 
 
