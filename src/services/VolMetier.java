@@ -23,7 +23,7 @@ public interface VolMetier {
 	public void addVolaJour(volajour v);
 	public User getInfoAdmin(String user, String password);
 	public List<Vol> getVolByAer(String aer); 
-	public void updateVol(String id,Date date,String heurEst,String status);
+	public void updateVol(String id,String date,String heurEst,String status);
 	
 	
 }

@@ -1,5 +1,7 @@
 package dao;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -117,11 +119,13 @@ public List<Vol> getVolByAer(String id) {
 
 
 
-public void updateVol(String id, Date date, String heurEst, String status) {
+public void updateVol(String id, String date, String heurEst, String status) throws ParseException {
 	Session session =  HibernateUtil.getSessionFactory().getCurrentSession();
 	session.beginTransaction();
-	 volajour vol = (volajour) session.createQuery("from volajour where numVol='"+id+"' ").uniqueResult();
-	// volajour vol = (volajour) session.createQuery("from volajour where numVol='"+id+"' and dateVol="+date).uniqueResult();
+	// volajour vol = (volajour) session.createQuery("from volajour where numVol='"+id+"' ").uniqueResult();
+	//Date date1=new SimpleDateFormat("yyyy-MM-dd").parse(date);
+	//System.out.println("la date est "+date1);
+	volajour vol = (volajour) session.createQuery("from volajour where numVol='"+id+"' and dateVol='"+date+"'").uniqueResult();
 	 vol.setHeureEstime(heurEst);
 	 vol.setStatutChange(status);
      session.update(vol);

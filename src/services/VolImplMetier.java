@@ -1,5 +1,6 @@
 package services;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -91,8 +92,13 @@ public class VolImplMetier implements VolMetier {
 
 
 
-	public void updateVol(String id, Date date, String heurEst, String status) {
-		dao.updateVol(id, date, heurEst, status);
+	public void updateVol(String id, String date, String heurEst, String status) {
+		try {
+			dao.updateVol(id, date, heurEst, status);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
