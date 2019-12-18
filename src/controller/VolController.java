@@ -21,6 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.google.gson.Gson;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
@@ -39,9 +40,9 @@ import services.VolMetier;
 @Controller
 public class VolController  {
 	 public static final String ACCOUNT_SID =
-	            "AC9eded85e6aee1a5174798a7222894504";
+	            "AC6d3a9494b40ec062143f495e8648bd33";
 	    public static final String AUTH_TOKEN =
-	            "3004ffbf38a00dff203d190e9f036bb7";
+	            "a4ca389ae53a0ba31a25335d183b9838";
 	Timer processus1;
 	boolean demarer=true;
 	String Demarre="Demarrer";
@@ -57,7 +58,8 @@ public class VolController  {
 	@RequestMapping(value="/index")
 	public String pageIndex(Model model){
 		// trai....
-		model.addAttribute("listeVols", services.getAllVols());
+			String json = new Gson().toJson(services.getAllVols());
+		model.addAttribute("listeVols", json);
 		return "index";
 		
 	}
@@ -137,9 +139,13 @@ public class VolController  {
 		if(val.contentEquals("aer")) {
 			model.addAttribute("listeVols", services.getVolByAer(id));
 			}
-		if(val.contentEquals("num")) {
+	/*	if(val.contentEquals("num")) {
+			for(Vol l :services.getVolByNumVol(id)) {
+				
+				System.out.println("le num "+l.getNumVol()+"la date "+l.getDateVol()+"le vol est "+l.getVolDepart());
+			}
 		model.addAttribute("listeVols", services.getVolByNumVol(id));
-		}
+		}*/
 		if(val.contentEquals("comp")) {
 		model.addAttribute("listeVols", services.getVolByComp(id));
 		}
@@ -304,12 +310,104 @@ public class VolController  {
 	
 		
 	}
+	@RequestMapping(value="/sort")
+	public String pageSort(Model model,
+			@RequestParam(value="day",required=false) String day,
+			@RequestParam(value="state",required=false) String state,
+			@RequestParam(value="val",required=false) String val,
+			@RequestParam(value="id",required=false) String id){
+		
+		
+		
+		if(day.contentEquals("aujourdhui") && state.isEmpty() ) {
+			System.out.println(day +" <- Day ---- State -> " + state);
+			//String json = ;
+			model.addAttribute("listeVols", new Gson().toJson(services.getVolByAujVol()));
+			
+			model.addAttribute("activeAuj", "btn-solid");
+			model.addAttribute("titre", "AUJOURD'HUI");
+			model.addAttribute("dayA", "aujourdhui");
+		}
+		
+		if(day.contentEquals("demain") && state.isEmpty()) {
+			System.out.println(day +" <- Day ---- State -> " + state);
+			//String json = );
+			model.addAttribute("listeVols", new Gson().toJson(services.getVolByDemainVol()));
+			
+			model.addAttribute("activeDem", "btn-solid");
+			model.addAttribute("titre", "DEMAIN");
+			model.addAttribute("dayD", "demain");
+		}
+		
+		
+		if(state.contentEquals("arrive") && day.isEmpty()) {
+			System.out.println(day +" <- Day ---- State -> " + state);
+			//String json = ;
+
+			model.addAttribute("listeVols",new Gson().toJson(services.getVolByArriveVol()));
+			model.addAttribute("activeAuj", "btn-solid");
+			model.addAttribute("stateA", "arrive");
+		}
+		
+		if(state.contentEquals("depart") && day.isEmpty()) {
+			System.out.println(day +" <- Day ---- State -> " + state);
+			//String json = ;
+			model.addAttribute("listeVols", new Gson().toJson(services.getVolByDepartVol()) );
+			model.addAttribute("activeDem", "btn-solid");
+			model.addAttribute("stateD", "depart");
+		}
+		
+		
+		if(day.contentEquals("aujourdhui") && state.contentEquals("arrive")) {
+			System.out.println(day +" <- Day ---- State -> " + state);
+			//String json = ;
+			model.addAttribute("listeVols", new Gson().toJson(services.getVolByAujArriveVol()));
+			model.addAttribute("activeAuj", "btn-solid");
+			model.addAttribute("titre", "AUJOURD'HUI");
+			model.addAttribute("dayA", "aujourdhui");
+			model.addAttribute("stateA", "arrive");
+		}
+		
+		if(day.contentEquals("aujourdhui") && state.contentEquals("depart")) {
+			System.out.println(day +" <- Day ---- State -> " + state);
+			//String json = ;
+			model.addAttribute("listeVols", new Gson().toJson(services.getVolByAujDepartVol()));
+			model.addAttribute("activeAuj", "btn-solid");
+			model.addAttribute("titre", "AUJOURD'HUI");
+			model.addAttribute("dayA", "aujourdhui");
+			model.addAttribute("stateD", "depart");
+		}
+		
+		
+		if(day.contentEquals("demain") && state.contentEquals("arrive")) {
+			System.out.println(day +" <- Day ---- State -> " + state);
+			//String json = 
+			model.addAttribute("listeVols", new Gson().toJson(services.getVolByDemArriveVol()));
+			model.addAttribute("activeDem", "btn-solid");
+			model.addAttribute("titre", "DEMAIN");
+			model.addAttribute("dayD", "demain");
+			model.addAttribute("stateA", "arrive");
+		}
+		
+		if(day.contentEquals("demain") && state.contentEquals("depart")) {
+			System.out.println(day +" <- Day ---- State -> " + state);
+		//	String json = 
+			model.addAttribute("listeVols", new Gson().toJson(services.getVolByDemDepartVol()) );
+			model.addAttribute("activeDem", "btn-solid");
+			model.addAttribute("titre", "DEMAIN");
+			model.addAttribute("dayD", "demain");
+			model.addAttribute("stateD", "depart");
+		}
+		
+		
+		return "index";
+	}
 	 public static void envoyer (String telClient, String numVol,String heureEstime,String statutChange) {
 	    	
 		   Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 		            Message message = Message
 		                .creator(new PhoneNumber(telClient), // to
-		                        new PhoneNumber("+14107775709"), // from 
+		                        new PhoneNumber("+14502317273"), // from 
 		                        "\n Derniere Mise A jour du  vol " + numVol+"\n"+"Heure Estimée : "+heureEstime+"\n"+"Status : "+statutChange+"\n" )
 		                .create();
 		        System.out.println(message.getSid());

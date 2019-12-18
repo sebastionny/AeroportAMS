@@ -17,7 +17,7 @@
 
 <body ng-app="myApp">
 
-	<div class="container">
+	<div ng-controller="exFiltreVue as ctrl"  class="container">
 		<div class="row">
 			<div class="col-sm-9 containerListe">
 			
@@ -33,10 +33,10 @@
 					            <a href="index.aspx" class="">
 					                <img src="./img/tousBtn.png"  class="img-fluid" alt="Départ"/>
 					            </a>
-					            <a href="filtreD.aspx" class="">
+					            <a href="sort.aspx?day=${dayA}${dayD}&state=depart"  class="">
 					                <img src="./img/departBtn.png"  class="img-fluid" alt="Départ"/>
 					            </a>
-					            <a href="filtreA.aspx" class="">
+					            <a href="sort.aspx?day=${dayA}${dayD}&state=arrive" class="">
 					                <img src="./img/arriveBtn.png"  class="img-fluid" alt="Arrivée"/>
 					            </a>
 					    </div>
@@ -46,27 +46,8 @@
 				<div class="row">
 					<div class="col-sm-12"><h2>Recherche par:</h2> </div>
 				
-					<div class="col-sm-4">
-						<form action="searchVol.aspx" method="post">
-					<div class="form-group mb-2">
-					    <select name="val" class="form-control">
-						  <option value="num">Numéro</option>
-						
-						  <option value="aer">Aeroport</option>
-						  <option value="comp">Compagnie</option>
-						</select>
-					  </div>
-					</div>
-					<div class="col-sm-4">
-					
-					<div class="form-group mx-sm-3 mb-2">
-					    <input type="text" class="form-control" id="recherche" placeholder="recherche" name="id">
-					  </div>
-					  
-					</div>
-					<div class="col-sm-4">
-						<button type="submit" class="btn btn-primary mb-2">RECHERCHER</button>
-						</form>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" ng-model="fil">
 					</div>
 					  
 					<div class="col-sm-12">
@@ -93,20 +74,23 @@
 						</tr>
 						
 						<!--  listeVols  --> 
-						<sw:forEach items="${listeVols}" var="o" >
-							<tr>
-								<td> <a href="#" class="btn btn-filtre-${o.volDepart } "></a>    </td>
-								<td>${o.numVol }</td>
-								<td>${o.idCompagnie }</td>
-								<td>${ o.volDepart==0 ?  o.codeAerDepart: o.aeroportDestination}</td>
-							
-								<td>${o.heurePanifie }</td>
-								<td>${o.heureEstime }</td>
-								<td>${o.statutChange }</td>
+												
+							<tr ng-repeat="vol in ctrl.liste | filter: fil">
+								<td> <a href="#" class="btn btn-filtre-{{vol.volDepart}} "></a>    </td>
+								<td>{{vol.numVol}}</td>
+								<td>{{vol.idCompagnie}}</td>
 								
-								<td class="btn-suivre"><a  href="suiviVol.aspx?id=${o.numVol}"><img class="img-fluid" src="./img/btn.png" alt="Suivre un vol"></a></td>
+								<td>{{vol.volDepart==0  ? vol.codeAerDepart : vol.aeroportDestination}}</td> 
+							
+								<td>{{vol.heurePanifie}}</td>
+								<td>{{vol.heureEstime}}</td>
+								<td>{{vol.statutChange}}</td>
+								
+								<td class="btn-suivre"><a  href="suiviVol.aspx?id={{vol.numVol}}"><img class="img-fluid" src="./img/btn.png" alt="Suivre un vol"></a></td>
 							</tr>
-						</sw:forEach> 
+						
+					
+				
 					</table>
 
 
@@ -123,8 +107,8 @@
 						
 						<div class=" mt-3">
 						
-						<a href="filtreAuj.aspx" class="btn btn-line ${activeAuj}">AUJOURD’HUI</a>
-						<a href="filtreDemain.aspx" class="btn btn-line ${activeDem} col-6">DEMAIN</a>
+						<a href="sort.aspx?day=aujourdhui&state=${stateA}${stateD}" class="btn btn-line ${activeAuj}">AUJOURD’HUI</a>
+						<a href="sort.aspx?day=demain&state=${stateA}${stateD}" class="btn btn-line ${activeDem} col-6">DEMAIN</a>
 					</div>
 					<div class="date mt-5">
 					
@@ -145,6 +129,20 @@
 	
 </body>
 <script>
+
+
+class exFiltre{
+
+    constructor(){
+        this.liste = ${listeVols};
+    }
+}
+
+angular
+    .module('myApp' , [])
+    .controller('exFiltreVue' , exFiltre);
+    
+
   function checkTime(i) {
     if (i < 10) {
         i = "0" + i;
