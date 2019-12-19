@@ -1,9 +1,14 @@
 package dao;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 
-public class Vol {
+public class Vol implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer volDepart;
 	private String numVol;
 	private String idCompagnie;

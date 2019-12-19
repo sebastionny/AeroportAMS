@@ -157,7 +157,7 @@ public class VolImplDataBase implements VolDAO{
 		Session session =  HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		
-		List<Vol> li = session.createQuery("from Vol )").list();
+		List<Vol> li = session.createQuery("from Vol  )").list();
 		for(Vol l:li) {
 		System.out.println("----"+l.getNumVol()+" -------"+l.getVolDepart()+"-------"+l.getHeureEstime());}
 		return li;

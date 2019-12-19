@@ -6,12 +6,15 @@
 
 <class name="dao.volajour" table="volajour" >
 
-	<id name="numVol" column="numVol"  >
-		
-	</id>
 	
 	
-	<property name="dateVol" column="dateVol"></property>
+	<composite-id class="dao.volajour" mapped="true">         
+	<key-property name="numVol" column="numVol" />        
+	 <key-property name="dateVol" column="dateVol"/>
+    </composite-id >
+	
+	
+
 	<property name="heureEstime" column="heureEstime"></property>
 	<property name="statutChange" column="statutChange"></property>
 

@@ -31,8 +31,10 @@ public class NotificationImplMetier implements NotificationMetier {
 	}
 
 
-	public List<Notification> getNotInscrit(String numVol) {
-		return dao.getNotInscrit(numVol);
+
+
+	public List<Notification> getNotInscrit(String id, String date) {
+		return dao.getNotInscrit(id, date);
 	}
 	
 	

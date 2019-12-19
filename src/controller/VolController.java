@@ -39,10 +39,10 @@ import services.VolMetier;
 
 @Controller
 public class VolController  {
-	 public static final String ACCOUNT_SID =
-	            "AC6d3a9494b40ec062143f495e8648bd33";
-	    public static final String AUTH_TOKEN =
-	            "a4ca389ae53a0ba31a25335d183b9838";
+	public static final String ACCOUNT_SID =
+            "";
+    public static final String AUTH_TOKEN =
+            "";
 	Timer processus1;
 	boolean demarer=true;
 	String Demarre="Demarrer";
@@ -102,7 +102,8 @@ public class VolController  {
 				
 				services.updateVol(mots[0], mots[1], mots[2], mots[3]);
 			
-				for (Notification n : services2.getNotInscrit(mots[0])) {
+				for (Notification n : services2.getNotInscrit(mots[0],mots[1])) {
+					System.out.println("num "+n.getNumVol()+" date "+n.getDateVol());
 					
 				envoyer (n.getTelClient(), mots[0],mots[2],mots[3]);
 				
@@ -407,7 +408,7 @@ public class VolController  {
 		   Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 		            Message message = Message
 		                .creator(new PhoneNumber(telClient), // to
-		                        new PhoneNumber("+14502317273"), // from 
+		                        new PhoneNumber(""), // from 
 		                        "\n Derniere Mise A jour du  vol " + numVol+"\n"+"Heure Estimée : "+heureEstime+"\n"+"Status : "+statutChange+"\n" )
 		                .create();
 		        System.out.println(message.getSid());

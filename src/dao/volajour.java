@@ -1,9 +1,14 @@
 package dao;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 
-public class volajour {
+public class volajour implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String numVol;
 	private Date dateVol;
 	private String heureEstime;

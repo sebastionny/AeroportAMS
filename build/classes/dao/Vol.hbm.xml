@@ -6,9 +6,11 @@
 
 <class name="dao.Vol" table="Vol" >
 
-	<id name="numVol" column="numVol"  >
-		
-	</id>
+	
+	<composite-id class="dao.Vol" mapped="true">         
+	<key-property name="numVol" column="numVol" />        
+	 <key-property name="dateVol" column="dateVol"/>
+    </composite-id >
 	
 	<property name="codeAerDepart" column="codeAerDepart"></property>
 	<property name="aeroportDestination" column="aeroportDestination"></property>

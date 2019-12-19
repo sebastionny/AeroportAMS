@@ -29,17 +29,18 @@ public class NotificationImplDataBase implements NotificationDAO{
 	
 	}
 
-	public List<Notification> getNotInscrit(String id) {
+	public List<Notification> getNotInscrit(String id,String date) {
 	
 		Session session =  HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		
 		
 		
-	return session.createQuery("from Notification where numVol='"+id+"' and arret=false ").list();
+	return session.createQuery("from Notification where numVol='"+id+"' and arret=false and dateVol='"+date+"' ").list();
 	
 	}
-		
+
+	
 
 
 }
